@@ -1,0 +1,41 @@
+---
+import { SITE } from '../../config';
+
+interface Props {
+  pageUrl: string;
+}
+const { pageUrl } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AutoRepair',
+  name: SITE.companyName,
+  image: `${SITE.url}/images/og-cover.jpg`,
+  '@id': pageUrl,
+  url: pageUrl,
+  telephone: SITE.phoneHref.replace('tel:', ''),
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.address,
+    addressLocality: 'Москва',
+    addressCountry: 'RU',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Москва',
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '00:00',
+      closes: '00:00',
+      description: SITE.workHours,
+    },
+  ],
+  sameAs: [] as string[],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

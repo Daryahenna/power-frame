@@ -1,0 +1,38 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-black/10 bg-paper">
+  <div class="container-page grid gap-10 py-10 md:grid-cols-[1.3fr_1fr_1fr] md:py-14">
+    <div>
+      <p class="text-lg font-extrabold uppercase text-ink">Сергей</p>
+      <p class="mt-2 max-w-sm text-sm leading-6 text-brand-steel">
+        Осмотр и сварочный ремонт рам старых внедорожников и других рамных автомобилей.
+      </p>
+    </div>
+
+    <div>
+      <p class="font-mono text-[10px] font-semibold uppercase text-brand-steel">Навигация</p>
+      <div class="mt-3 grid gap-2 text-sm">
+        <a href="/#services" class="hover:text-signal">Что делаем</a>
+        <a href="/#inspection" class="hover:text-signal">Как проходит осмотр</a>
+        <a href="/#price" class="hover:text-signal">От чего зависит цена</a>
+      </div>
+    </div>
+
+    <div>
+      <p class="font-mono text-[10px] font-semibold uppercase text-brand-steel">Связаться</p>
+      <a href="/#contacts" class="mt-3 inline-flex text-sm font-semibold text-signal hover:text-brand-dark">
+        Запись по телефону
+      </a>
+      <p class="mt-3 text-xs leading-5 text-brand-steel">Номер, адрес и график добавим после согласования.</p>
+    </div>
+  </div>
+
+  <div class="border-t border-black/10">
+    <div class="container-page flex flex-col gap-2 py-4 text-xs text-brand-steel sm:flex-row sm:items-center sm:justify-between">
+      <p>© {currentYear} Сергей. Ремонт рам автомобилей.</p>
+      <p>Презентационная версия</p>
+    </div>
+  </div>
+</footer>

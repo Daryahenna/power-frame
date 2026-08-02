@@ -1,0 +1,45 @@
+---
+interface PriceRow {
+  service: string;
+  priceFrom: string;
+}
+interface Props {
+  modelName: string;
+  priceTable: PriceRow[];
+}
+const { modelName, priceTable } = Astro.props;
+---
+
+<section class="section">
+  <div class="container-page">
+    <h2 class="section-title">Цены на ремонт рамы {modelName}</h2>
+    <p class="mt-2 text-sm text-brand-steel">
+      Цены ориентировочные — точную стоимость называем после диагностики по фото или очно.
+    </p>
+
+    <div class="mt-6 overflow-x-auto rounded-xl ring-1 ring-gray-200">
+      <table class="w-full min-w-[480px] text-left text-sm">
+        <thead class="bg-gray-50 text-brand-steel">
+          <tr>
+            <th class="px-5 py-3 font-semibold">Услуга</th>
+            <th class="px-5 py-3 font-semibold">Цена, от</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+          {
+            priceTable.map((row) => (
+              <tr>
+                <td class="px-5 py-3 text-brand-black">{row.service}</td>
+                <td class="px-5 py-3 font-semibold text-brand">{row.priceFrom}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-6">
+      <a href="/tseny/" class="font-semibold text-brand hover:underline">Полный прайс-лист →</a>
+    </div>
+  </div>
+</section>

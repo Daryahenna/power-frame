@@ -1,0 +1,44 @@
+---
+import { SITE } from '../../config';
+
+interface Props {
+  brandLabel: string;
+  modelName: string;
+  h1: string;
+  subtitle: string;
+  priceFrom: string;
+}
+const { brandLabel, modelName, h1, subtitle, priceFrom } = Astro.props;
+---
+
+<section class="bg-gradient-to-b from-gray-50 to-white">
+  <div class="container-page grid gap-10 py-12 sm:py-16 lg:grid-cols-2 lg:items-center">
+    <div>
+      <p class="mb-3 inline-block rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand">
+        {brandLabel} · {modelName}
+      </p>
+      <h1 class="text-3xl font-extrabold leading-tight text-brand-black sm:text-4xl">{h1}</h1>
+      <p class="mt-4 text-lg text-brand-steel">{subtitle}</p>
+
+      <div class="mt-6 flex flex-wrap items-center gap-4">
+        <p class="text-2xl font-bold text-brand-black">
+          Цена от <span class="text-brand">{priceFrom}</span>
+        </p>
+        <a href="#cta-form" class="btn-primary">Оценка по фото за 5 минут</a>
+      </div>
+
+      <ul class="mt-8 grid grid-cols-2 gap-3 text-sm text-brand-steel sm:grid-cols-4">
+        <li class="flex items-center gap-2 rounded-lg bg-gray-50 px-3 py-2">🛡 Гарантия</li>
+        <li class="flex items-center gap-2 rounded-lg bg-gray-50 px-3 py-2">⚙️ Стапель 20 т</li>
+        <li class="flex items-center gap-2 rounded-lg bg-gray-50 px-3 py-2">🏔 Опыт с рамными SsangYong/Kia</li>
+        <li class="flex items-center gap-2 rounded-lg bg-gray-50 px-3 py-2">💬 Telegram/WhatsApp</li>
+      </ul>
+    </div>
+
+    <div class="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-gray-200">
+      <div class="absolute inset-0 flex items-center justify-center text-center text-sm text-gray-500">
+        [ФОТО: {modelName} на стапеле / диагностика рамы]
+      </div>
+    </div>
+  </div>
+</section>

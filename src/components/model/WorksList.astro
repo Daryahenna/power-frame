@@ -1,0 +1,23 @@
+---
+interface Props {
+  modelName: string;
+  works: string[];
+}
+const { modelName, works } = Astro.props;
+---
+
+<section class="section bg-gray-50">
+  <div class="container-page">
+    <h2 class="section-title">Какие работы делаем именно по {modelName}</h2>
+    <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+      {
+        works.map((work) => (
+          <li class="flex items-start gap-3 rounded-xl bg-white p-4 shadow-sm ring-1 ring-gray-100">
+            <span class="mt-0.5 text-brand">✔</span>
+            <span class="text-brand-steel">{work}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

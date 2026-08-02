@@ -1,0 +1,34 @@
+---
+import BreadcrumbSchema from './schema/BreadcrumbSchema.astro';
+
+interface Crumb {
+  name: string;
+  url: string;
+}
+interface Props {
+  items: Crumb[];
+}
+const { items } = Astro.props;
+---
+
+<BreadcrumbSchema items={items} />
+<nav aria-label="Хлебные крошки" class="border-b border-gray-100 bg-gray-50">
+  <ol class="container-page flex flex-wrap items-center gap-1 py-3 text-sm text-gray-500">
+    {
+      items.map((item, index) => (
+        <li class="flex items-center gap-1">
+          {index > 0 && <span class="mx-1 text-gray-300">/</span>}
+          {index === items.length - 1 ? (
+            <span class="font-medium text-brand-black" aria-current="page">
+              {item.name}
+            </span>
+          ) : (
+            <a href={item.url} class="hover:text-brand hover:underline">
+              {item.name}
+            </a>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</nav>

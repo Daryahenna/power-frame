@@ -1,0 +1,24 @@
+---
+interface Props {
+  modelName: string;
+  painText: string;
+  painQuote?: string;
+  factsVerified: boolean;
+}
+const { modelName, painText, painQuote, factsVerified } = Astro.props;
+---
+
+<section class="section">
+  <div class="container-page max-w-3xl">
+    <h2 class="section-title">Типичная проблема рамы {modelName}</h2>
+    {!factsVerified && (
+      <p class="todo-badge mt-3">TODO: уточнить у клиента реальные владельческие кейсы для этой модели</p>
+    )}
+    <p class="mt-4 leading-relaxed text-brand-steel">{painText}</p>
+    {painQuote && (
+      <p class="mt-4 rounded-lg border-l-4 border-brand bg-gray-50 p-4 text-sm italic text-gray-600">
+        {painQuote}
+      </p>
+    )}
+  </div>
+</section>

@@ -1,0 +1,27 @@
+---
+const steps = [
+  { title: 'Диагностика', desc: 'Осмотр, зачистка подозрительных зон, при необходимости — толщинометрия металла.', img: '[ФОТО: диагностика рамы]' },
+  { title: 'Стапель', desc: 'Восстановление геометрии рамы с контролем по заводским точкам.', img: '[ФОТО: стапель 20 т]' },
+  { title: 'Сварка MIG/MAG', desc: 'Вварка ремонтных вставок, усиление силовых зон.', img: '[ФОТО: сварочный пост]' },
+  { title: 'Пескоструй + антикор', desc: 'Подготовка поверхности и защита от коррозии на годы вперёд.', img: '[ФОТО: пескоструйная камера]' },
+];
+---
+
+<section class="section bg-gray-50">
+  <div class="container-page">
+    <h2 class="section-title">Оборудование и процесс работы</h2>
+    <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        steps.map((step, i) => (
+          <div class="rounded-xl bg-white p-5 shadow-sm ring-1 ring-gray-100">
+            <div class="mb-3 flex aspect-video items-center justify-center rounded-lg bg-gray-200 text-xs text-gray-500">
+              {step.img}
+            </div>
+            <p class="font-semibold text-brand-black">{i + 1}. {step.title}</p>
+            <p class="mt-1 text-sm text-brand-steel">{step.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+---
+interface Generation {
+  name: string;
+  years: string;
+  notes: string;
+}
+interface Props {
+  modelName: string;
+  generations: Generation[];
+}
+const { modelName, generations } = Astro.props;
+---
+
+{generations.length > 0 && (
+  <section class="section">
+    <div class="container-page">
+      <h2 class="section-title">Поколения {modelName} и их особенности</h2>
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        {
+          generations.map((gen) => (
+            <div class="rounded-xl border border-gray-200 p-5">
+              <p class="font-bold text-brand-black">{gen.name}</p>
+              <p class="text-sm font-medium text-brand">{gen.years}</p>
+              <p class="mt-2 text-sm text-brand-steel">{gen.notes}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+)}

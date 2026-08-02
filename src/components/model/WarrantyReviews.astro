@@ -1,0 +1,40 @@
+---
+interface Props {
+  modelName: string;
+}
+const { modelName } = Astro.props;
+
+const reviews = [
+  { name: '[ИМЯ КЛИЕНТА]', car: `${modelName}`, text: 'TODO: реальный отзыв владельца — уточнить у клиента.', photo: true },
+  { name: '[ИМЯ КЛИЕНТА]', car: `${modelName}`, text: 'TODO: реальный отзыв владельца — уточнить у клиента.', photo: true },
+];
+---
+
+<section class="section bg-gray-50">
+  <div class="container-page grid gap-10 lg:grid-cols-2">
+    <div>
+      <h2 class="section-title">Гарантия</h2>
+      <ul class="mt-4 space-y-3 text-brand-steel">
+        <li class="flex gap-2"><span class="text-brand">✔</span> Гарантия на сварочные работы — [СРОК ГАРАНТИИ]</li>
+        <li class="flex gap-2"><span class="text-brand">✔</span> Гарантия на антикоррозийную обработку — [СРОК ГАРАНТИИ]</li>
+        <li class="flex gap-2"><span class="text-brand">✔</span> Письменный акт выполненных работ</li>
+        <li class="flex gap-2"><span class="text-brand">✔</span> Фотофиксация до/после на каждом этапе</li>
+      </ul>
+      <p class="todo-badge mt-4">TODO: уточнить у клиента точные условия и сроки гарантии</p>
+    </div>
+
+    <div>
+      <h2 class="section-title">Отзывы владельцев {modelName}</h2>
+      <div class="mt-4 space-y-4">
+        {
+          reviews.map((r) => (
+            <div class="rounded-xl bg-white p-5 shadow-sm ring-1 ring-gray-100">
+              <p class="text-sm text-brand-steel">{r.text}</p>
+              <p class="mt-3 text-sm font-semibold text-brand-black">{r.name} · {r.car}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

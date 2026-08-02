@@ -1,0 +1,30 @@
+---
+import { SITE } from '../../config';
+
+interface Props {
+  serviceName: string;
+  description: string;
+  pageUrl: string;
+}
+const { serviceName, description, pageUrl } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  serviceType: serviceName,
+  name: serviceName,
+  description,
+  provider: {
+    '@type': 'AutoRepair',
+    name: SITE.companyName,
+    telephone: SITE.phoneHref.replace('tel:', ''),
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Москва',
+  },
+  url: pageUrl,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
