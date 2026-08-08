@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '@fontsource-variable/onest/wght.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import LocalBusinessSchema from '../components/schema/LocalBusinessSchema.astro';
@@ -18,7 +19,8 @@ const {
   noindex = false,
   image = '/images/workshop-welding.jpg',
 } = Astro.props;
-const canonicalPath = Astro.url.pathname;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
+const imageUrl = new URL(image, Astro.site ?? Astro.url.origin).toString();
 const hasBusinessData = !SITE.companyName.includes('[') && !SITE.address.includes('[');
 ---
 
@@ -29,25 +31,22 @@ const hasBusinessData = !SITE.companyName.includes('[') && !SITE.address.include
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalPath} />
+    <link rel="canonical" href={canonicalUrl} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalPath} />
-    <meta property="og:image" content={image} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={imageUrl} />
     <meta property="og:locale" content="ru_RU" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Russo+One&display=swap&subset=cyrillic" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#d3102f" />
+    <meta name="theme-color" content="#070808" />
 
     {hasBusinessData && <LocalBusinessSchema pageUrl={Astro.url.toString()} />}
     <slot name="head" />

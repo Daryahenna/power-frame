@@ -4,27 +4,28 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        paper: '#f3f2ee',
-        ink: '#171717',
-        metal: '#7c8287',
-        signal: '#d3102f',
-        line: '#d4d2cc',
+        paper: '#eef1ee',
+        surface: '#f7f8f6',
+        ink: '#101212',
+        metal: '#929a98',
+        signal: '#c8ff3d',
+        line: '#cdd1ce',
         brand: {
-          DEFAULT: '#d3102f',
-          dark: '#a50b24',
-          black: '#171717',
-          steel: '#63686c',
+          DEFAULT: '#c8ff3d',
+          dark: '#b7f52a',
+          black: '#070808',
+          steel: '#5d6562',
+          soft: '#e8f4ca',
         },
       },
       fontFamily: {
-        sans: ['"Golos Text"', 'sans-serif'],
-        mono: ['"IBM Plex Mono"', 'monospace'],
+        sans: ['"Onest Variable"', 'sans-serif'],
+        mono: ['"Onest Variable"', 'sans-serif'],
       },
       boxShadow: {
-        focus: '0 0 0 3px rgba(211, 16, 47, 0.2)',
+        focus: '0 0 0 3px rgba(200, 255, 61, 0.24)',
       },
     },
   },
   plugins: [require('@tailwindcss/typography')],
 };
-

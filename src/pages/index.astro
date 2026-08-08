@@ -1,163 +1,252 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactBlock from '../components/ContactBlock.astro';
+import { SITE } from '../config';
 
-const title = 'Ремонт рам автомобилей в Москве';
+const title = 'Сварочные работы любой сложности в Москве | Power Frame Beard';
 const description =
-  'Диагностика и сварочный ремонт рам автомобилей любых марок: удаление сгнившего металла, ремонт и замена повреждённых участков.';
-
-const services = [
-  {
-    title: 'Осмотр на подъёмнике',
-    text: 'Поднимаем автомобиль, осматриваем раму и простукиваем металл, чтобы понять реальный объём повреждения.',
-  },
-  {
-    title: 'Локальный сварочный ремонт',
-    text: 'Вырезаем слабый металл, готовим участок и ввариваем ремонтный элемент там, где это технически оправдано.',
-  },
-  {
-    title: 'Замена повреждённых участков',
-    text: 'Когда локальной заплаты недостаточно, меняем часть секции и восстанавливаем силовую зону.',
-  },
-  {
-    title: 'Разборка для доступа',
-    text: 'Если к месту ремонта нельзя подойти напрямую, заранее учитываем разборку и обратную сборку машины.',
-  },
-];
+  'Сварочная мастерская Power Frame Beard в Москве: осмотр на подъёмнике, восстановление рам, усиление слабых участков, локальная сварка и подготовка автомобиля к ремонту.';
 
 const process = [
   {
-    title: 'Звонок',
-    text: 'Называете автомобиль и коротко описываете проблему. Мастер говорит, есть ли смысл приезжать на осмотр.',
+    title: 'Смотрим металл, а не фото',
+    text: 'Фотографии помогают понять масштаб, но решение принимается после подъёмника: важно увидеть слабые места вокруг дефекта.',
   },
   {
-    title: 'Платный осмотр',
-    text: 'Машину поднимают, проверяют доступ и состояние металла не только в видимой дыре, но и рядом.',
+    title: 'Открываем повреждение',
+    text: 'Срезаем разрушенный металл, проверяем края, убираем старые заплаты и грязь, которая мешает нормальному шву.',
   },
   {
-    title: 'Цена до начала',
-    text: 'Объём, разборка и стоимость согласуются после осмотра. Без цены, взятой с потолка по одной фотографии.',
+    title: 'Ввариваем ремонтный участок',
+    text: 'Подгоняем металл по месту, варим с понятной геометрией, не закрываем гниль красивой накладкой сверху.',
   },
   {
-    title: 'Ремонт и выдача',
-    text: 'Слабый металл удаляют, участок ремонтируют, а разобранные элементы возвращают на место.',
+    title: 'Согласуем объём заранее',
+    text: 'Цена зависит от доступа, разборки и состояния соседнего металла. До старта работ владелец понимает, за что платит.',
+  },
+];
+
+const services = [
+  {
+    title: 'Сварка рамы',
+    text: 'Локальное восстановление повреждённых участков, трещин, сгнивших зон и старых неудачных ремонтов.',
+  },
+  {
+    title: 'Усиление металла',
+    text: 'Ремонтные элементы, подгонка, проварка и усиление там, где родной металл уже не держит нагрузку.',
+  },
+  {
+    title: 'Разборка для доступа',
+    text: 'Снимаем мешающие элементы, если без этого нельзя нормально подготовить металл и выполнить работу.',
+  },
+  {
+    title: 'Осмотр перед покупкой',
+    text: 'Показываем реальные слабые места рамы до сделки, чтобы не покупать красивый кузов с плохой основой.',
   },
 ];
 
 const priceFactors = [
-  'Площадь и количество повреждений',
-  'Состояние металла вокруг отверстий',
-  'Доступ к месту сварки',
-  'Необходимость разборки и обратной сборки',
+  'Где находится повреждение и насколько к нему можно подойти',
+  'Сколько слабого металла придётся удалить',
+  'Нужна ли разборка, снятие деталей и обратная сборка',
+  'Можно ли сделать локальный ремонт или нужна замена участка',
+];
+
+const reviewSlots = [
+  {
+    title: 'Скрин отзыва',
+    text: 'Сюда вставим реальный отзыв клиента после согласования.',
+  },
+  {
+    title: 'Фото до/после',
+    text: 'Заменим демонстрационный кадр на материал мастерской.',
+  },
+  {
+    title: 'Комментарий мастера',
+    text: 'Коротко объясним, что было с рамой и что сделали.',
+  },
 ];
 
 const faq = [
   {
-    question: 'Какие автомобили берёте?',
+    question: 'Можно ли понять цену по фото?',
     answer:
-      'Рамные автомобили любых марок. Решение по конкретной машине принимается после короткого разговора и осмотра: если работа понятна и выполнима, её берут.',
+      'По фото можно дать предварительное направление. Точную стоимость называют после осмотра на подъёмнике, потому что ржавчина часто уходит дальше видимого края.',
   },
   {
-    question: 'Можно узнать точную цену по фотографии?',
+    question: 'Вы делаете только рамные автомобили?',
     answer:
-      'Нет. Фотография показывает только видимую часть. Для точной цены нужно поднять машину, проверить металл вокруг повреждения и понять, нужна ли разборка.',
+      'Основной фокус - рамные автомобили и сложные сварочные работы по силовым элементам. По другим задачам решение принимается после описания и фотографий.',
   },
   {
-    question: 'Есть гарантия на ремонт?',
+    question: 'Почему нельзя просто заварить дырку сверху?',
     answer:
-      'Мастерская отвечает за выполненный сварной шов. Но дать гарантию на весь металл сильно корродированной рамы невозможно: рядом с новым швом может разрушиться другой слабый участок.',
+      'Такой ремонт выглядит быстро, но слабый металл остаётся под заплатой. Нормальная работа начинается с удаления разрушенного участка до живого металла.',
   },
   {
-    question: 'Снимаете кузов с рамы?',
+    question: 'Сколько длится осмотр?',
     answer:
-      'На старте мастерская занимается сварочным ремонтом без полного снятия кузова. Частичная разборка возможна, если она нужна для безопасного доступа к месту ремонта.',
+      'Обычно хватает подъёмника, фотографий зоны повреждения и короткого разговора по объёму. После этого можно обсуждать сроки и стоимость ремонта.',
   },
   {
-    question: 'Есть эвакуатор или хранение машины?',
+    question: 'Будет автоматический расчёт по фото?',
     answer:
-      'Своего эвакуатора, доставки и отдельной стоянки нет. При необходимости владелец организует эвакуатор самостоятельно.',
+      'Да, позже добавим предварительный расчёт по фотографиям. Сейчас оставляем понятный путь: фото, разговор, осмотр на подъёмнике.',
   },
 ];
 ---
 
-<BaseLayout title={title} description={description} image="/og.png" noindex>
-  <section class="relative isolate flex min-h-[690px] items-end overflow-hidden bg-ink text-white lg:min-h-[calc(100dvh-72px)]">
+<BaseLayout title={title} description={description} image="/og.jpg" noindex={SITE.isPreview}>
+  <section
+    class="hero-shell"
+    aria-labelledby="hero-title"
+    data-rust-reveal
+    data-clean-src="/images/power-frame-rust-after.webp"
+  >
     <img
-      src="/images/workshop-welding.jpg"
-      alt="Работа с повреждённой рамой автомобиля"
-      class="absolute inset-0 h-full w-full object-cover object-center"
-      width="1800"
-      height="1000"
+      src="/images/power-frame-rust-before.webp"
+      srcset="/images/power-frame-rust-before-960.webp 960w, /images/power-frame-rust-before.webp 1920w"
+      sizes="100vw"
+      alt="Ржавая рама автомобиля перед сварочным ремонтом"
+      class="hero-rust-base"
+      width="1920"
+      height="1080"
       fetchpriority="high"
     />
-    <div class="absolute inset-0 bg-black/70"></div>
-    <div class="absolute inset-y-0 left-[calc(50%-1px)] hidden w-px bg-white/15 lg:block"></div>
+    <canvas class="hero-rust-canvas" data-rust-canvas aria-hidden="true"></canvas>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-grid" aria-hidden="true"></div>
 
-    <div class="container-page relative z-10 w-full pb-12 pt-20 sm:pb-16 lg:pb-20">
-      <div class="max-w-5xl">
-        <p class="reveal font-mono text-[11px] font-semibold uppercase text-white/70">
-          Москва · Сварочная мастерская
-        </p>
-        <h1 class="reveal reveal-delay-1 mt-5 max-w-5xl text-5xl font-extrabold leading-[0.96] text-white sm:text-6xl lg:text-7xl">
-          Ремонт рам автомобилей
+    <div class="container-page hero-content">
+      <div class="hero-copy">
+        <p class="hero-kicker reveal-intro">Москва / сварочная мастерская</p>
+        <h1 id="hero-title" class="hero-title reveal-intro reveal-intro-delay-1">
+          <span>Сварочные работы</span>
+          <span>любой сложности</span>
         </h1>
-        <p class="reveal reveal-delay-2 mt-7 max-w-2xl text-lg leading-7 text-white/80 sm:text-xl sm:leading-8">
-          Поднимаем машину, находим слабый металл, вырезаем сгнившие участки и ввариваем ремонтные элементы. Объём и цена только после осмотра.
-        </p>
-        <div class="reveal reveal-delay-2 mt-9 flex flex-col gap-3 sm:flex-row">
-          <a href="#contacts" class="btn-primary sm:min-w-48">Записаться на осмотр</a>
-          <a href="#inspection" class="btn-secondary border-white/70 text-white hover:bg-white hover:text-ink sm:min-w-48">
-            Как проходит осмотр
-          </a>
+        <div class="hero-actions reveal-intro reveal-intro-delay-2">
+          <a href="#contacts" class="button button-signal">Записаться на осмотр</a>
+          <a href="#process" class="button button-ghost">Как проходит осмотр</a>
         </div>
       </div>
 
-      <div class="mt-12 flex max-w-3xl flex-wrap gap-x-7 gap-y-3 border-t border-white/20 pt-5 font-mono text-[10px] uppercase text-white/60">
-        <span>Любые рамные марки</span>
+      <figure class="hero-machine reveal-intro reveal-intro-delay-3">
+        <img
+          src="/images/power-frame-welder.webp"
+          srcset="/images/power-frame-welder-720.webp 720w, /images/power-frame-welder.webp 1280w"
+          sizes="(min-width: 1024px) 42vw, 72vw"
+          alt="Профессиональный сварочный аппарат в мастерской"
+          width="1280"
+          height="960"
+        />
+        <figcaption>
+          <span>BEARD FRAME</span>
+          <strong>Power Frame workshop</strong>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="brush-hint" aria-hidden="true">
+      <span></span>
+      Проведите по ржавчине
+    </div>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Сварочные работы любой сложности</span>
         <span>Осмотр на подъёмнике</span>
-        <span>Сварка и замена участков</span>
-      </div>
-    </div>
-
-    <p class="absolute bottom-4 right-5 z-10 hidden font-mono text-[9px] uppercase text-white/45 sm:block">
-      Временная фотография для макета
-    </p>
-  </section>
-
-  <section class="border-b border-black/10 bg-paper" aria-label="Основные принципы работы">
-    <div class="container-page grid md:grid-cols-3">
-      <div class="border-b border-black/10 py-6 md:border-b-0 md:border-r md:pr-8">
-        <p class="font-mono text-[10px] font-semibold text-signal">01</p>
-        <p class="mt-2 font-semibold text-ink">Не маскируем гниль красивым швом</p>
-      </div>
-      <div class="border-b border-black/10 py-6 md:border-b-0 md:border-r md:px-8">
-        <p class="font-mono text-[10px] font-semibold text-signal">02</p>
-        <p class="mt-2 font-semibold text-ink">Согласуем объём после доступа к раме</p>
-      </div>
-      <div class="py-6 md:pl-8">
-        <p class="font-mono text-[10px] font-semibold text-signal">03</p>
-        <p class="mt-2 font-semibold text-ink">Возвращаем собранный автомобиль</p>
+        <span>Рама, металл, геометрия</span>
+        <span>Без красивых заплат поверх гнили</span>
+        <span>Power Frame Beard</span>
+        <span>Сварочные работы любой сложности</span>
+        <span>Осмотр на подъёмнике</span>
+        <span>Рама, металл, геометрия</span>
+        <span>Без красивых заплат поверх гнили</span>
+        <span>Power Frame Beard</span>
       </div>
     </div>
   </section>
 
-  <section id="services" class="section-shell bg-paper">
-    <div class="container-page">
-      <div class="max-w-4xl">
-        <p class="kicker">Что делаем</p>
-        <h2 class="section-heading">Ремонт, который нужен машине сейчас</h2>
-        <p class="section-copy">
-          Без обещаний полной реставрации. Задача мастерской — восстановить повреждённый участок рамы и вернуть автомобиль владельцу в понятном состоянии.
+  <section id="proof" class="section section-proof">
+    <div class="container-page proof-layout">
+      <div class="section-intro" data-reveal>
+        <p class="section-kicker">До / после</p>
+        <h2 class="display-heading">Один участок. Два состояния металла.</h2>
+        <p class="section-lead">
+          Пока используем демонстрационный кадр, чтобы показать механику сайта. Реальные фото работ заменят его без перестройки блока.
         </p>
       </div>
 
-      <div class="mt-12 grid border-t border-black/15 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="compare-widget" data-compare data-reveal>
+        <img
+          src="/images/power-frame-rust-before.webp"
+          srcset="/images/power-frame-rust-before-960.webp 960w, /images/power-frame-rust-before.webp 1920w"
+          sizes="(min-width: 1024px) 58vw, 100vw"
+          alt="Рама до ремонта, коррозия и отверстия в металле"
+          width="1920"
+          height="1080"
+          loading="lazy"
+        />
+        <div class="compare-after">
+          <img
+            src="/images/power-frame-rust-after.webp"
+            srcset="/images/power-frame-rust-after-960.webp 960w, /images/power-frame-rust-after.webp 1920w"
+            sizes="(min-width: 1024px) 58vw, 100vw"
+            alt="Та же рама после сварочного ремонта"
+            width="1920"
+            height="1080"
+            loading="lazy"
+          />
+        </div>
+        <div class="compare-label compare-label-before">До</div>
+        <div class="compare-label compare-label-after">После</div>
+        <div class="compare-divider" aria-hidden="true"></div>
+        <input class="compare-range" type="range" min="0" max="100" value="52" aria-label="Сравнить состояние рамы до и после ремонта" />
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="section section-process">
+    <div class="container-page">
+      <div class="section-intro section-intro-light" data-reveal>
+        <p class="section-kicker">Осмотр и ремонт</p>
+        <h2 class="display-heading">Сначала диагностика. Потом сварка.</h2>
+        <p class="section-lead">
+          Текст из старого первого экрана уходит сюда: владелец сразу видит логику работы и понимает, почему цена появляется после подъёмника.
+        </p>
+      </div>
+
+      <ol class="process-grid">
+        {
+          process.map((step, index) => (
+            <li class="process-card" data-reveal>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id="services" class="section section-services">
+    <div class="container-page">
+      <div class="section-intro" data-reveal>
+        <p class="section-kicker">Работы</p>
+        <h2 class="display-heading">Сварочная мастерская, которую легко запомнить</h2>
+        <p class="section-lead">
+          Power Frame Beard звучит как отдельная мастерская, а не безликий автосервис. Домен остаётся Power-frame.ru, в коммуникации используем короткий запоминаемый бренд.
+        </p>
+      </div>
+
+      <div class="service-register">
         {
           services.map((service, index) => (
-            <article class="border-b border-black/15 py-7 sm:odd:pr-6 sm:even:border-l sm:even:pl-6 lg:border-l lg:px-6 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0">
-              <p class="font-mono text-xs font-semibold text-signal">{String(index + 1).padStart(2, '0')}</p>
-              <h3 class="mt-8 text-xl font-bold text-ink">{service.title}</h3>
-              <p class="mt-3 text-sm leading-6 text-brand-steel">{service.text}</p>
+            <article class="service-row" data-reveal>
+              <span class="service-number">{String(index + 1).padStart(2, '0')}</span>
+              <h3>{service.title}</h3>
+              <p>{service.text}</p>
             </article>
           ))
         }
@@ -165,65 +254,28 @@ const faq = [
     </div>
   </section>
 
-  <section class="border-y border-white/10 bg-ink text-white">
-    <div class="container-page grid gap-10 py-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-start lg:py-20">
-      <div>
-        <p class="font-mono text-[11px] font-semibold uppercase text-white/55">Честные границы</p>
-        <h2 class="mt-4 text-3xl font-bold leading-[1.05] text-white sm:text-4xl">Чего здесь не обещают</h2>
-      </div>
-      <div class="grid border-t border-white/20 sm:grid-cols-2">
-        <div class="border-b border-white/20 py-5 sm:border-r sm:pr-6">
-          <p class="font-semibold">Полное снятие кузова</p>
-          <p class="mt-2 text-sm leading-6 text-white/60">На старте мастерская работает без кузовного демонтажа.</p>
-        </div>
-        <div class="border-b border-white/20 py-5 sm:pl-6">
-          <p class="font-semibold">Цинкование рамы</p>
-          <p class="mt-2 text-sm leading-6 text-white/60">Для этого нужен другой процесс и дорогое оборудование.</p>
-        </div>
-        <div class="border-b border-white/20 py-5 sm:border-b-0 sm:border-r sm:pr-6">
-          <p class="font-semibold">Точную цену по фото</p>
-          <p class="mt-2 text-sm leading-6 text-white/60">Скрытая коррозия и доступ становятся понятны только на подъёмнике.</p>
-        </div>
-        <div class="py-5 sm:pl-6">
-          <p class="font-semibold">Эвакуатор и хранение</p>
-          <p class="mt-2 text-sm leading-6 text-white/60">Доставку и стоянку владелец организует самостоятельно.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="inspection" class="section-shell bg-[#fbfaf7]">
-    <div class="container-page grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-      <figure class="overflow-hidden rounded-[6px] bg-ink">
-        <div class="aspect-[16/11] overflow-hidden">
-          <img
-            src="/images/workshop-frame.jpg"
-            alt="Осмотр и подготовка повреждённой части автомобиля"
-            class="h-full w-full object-cover"
-            width="1800"
-            height="1000"
-            loading="lazy"
-          />
-        </div>
-        <figcaption class="border-t border-white/15 px-5 py-4 font-mono text-[9px] uppercase text-white/55">
-          Временная фотография · заменим на реальный материал
-        </figcaption>
-      </figure>
-
-      <div class="lg:py-4">
-        <p class="kicker">Диагностика</p>
-        <h2 class="section-heading">Сначала поднять. Потом считать.</h2>
-        <p class="section-copy">
-          Осмотр платный: он занимает подъёмник и рабочее время. Точную стоимость диагностики называют при записи.
+  <section id="price" class="section section-price">
+    <div class="container-page price-layout">
+      <div class="price-main" data-reveal>
+        <p class="section-kicker">Стоимость</p>
+        <h2 class="display-heading">Расчёт после осмотра, без угадайки по одной фотографии.</h2>
+        <p class="price-value"><span>от</span> 10 000 ₽</p>
+        <p class="price-note">
+          Ориентир для небольшого локального повреждения с прямым доступом. Финальный прайс и стоимость осмотра заменим после согласования.
         </p>
+      </div>
 
-        <ol class="mt-9 border-t border-black/15">
+      <div class="price-protocol" data-reveal>
+        <div class="protocol-head">
+          <span>Что влияет на сумму</span>
+          <span>4 фактора</span>
+        </div>
+        <ol>
           {
-            process.map((step, index) => (
-              <li class="grid grid-cols-[42px_1fr] gap-3 border-b border-black/15 py-5 sm:grid-cols-[48px_0.7fr_1.3fr] sm:gap-5">
-                <span class="font-mono text-xs font-semibold text-signal">{String(index + 1).padStart(2, '0')}</span>
-                <h3 class="font-bold text-ink">{step.title}</h3>
-                <p class="col-start-2 text-sm leading-6 text-brand-steel sm:col-start-auto">{step.text}</p>
+            priceFactors.map((factor, index) => (
+              <li>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>{factor}</strong>
               </li>
             ))
           }
@@ -232,151 +284,50 @@ const faq = [
     </div>
   </section>
 
-  <section id="quality" class="section-shell border-y border-black/10 bg-paper">
+  <section id="reviews" class="section section-reviews">
     <div class="container-page">
-      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-        <div>
-          <p class="kicker">Почему переделывают чужую работу</p>
-          <h2 class="section-heading">Красивый шов ещё не означает прочный ремонт</h2>
-          <p class="section-copy">
-            Главная ошибка — приварить случайный кусок металла поверх слабого основания. Внешне всё может выглядеть аккуратно, а нагрузку такой ремонт не держит.
-          </p>
-        </div>
-
-        <div class="grid gap-px overflow-hidden rounded-[6px] border border-black/15 bg-black/15 sm:grid-cols-2">
-          <article class="bg-[#e6e4de] p-6 sm:p-8">
-            <p class="font-mono text-[10px] font-semibold uppercase text-brand-steel">Как делать не стоит</p>
-            <h3 class="mt-12 text-2xl font-bold text-ink">Заплата поверх гнили</h3>
-            <p class="mt-4 text-sm leading-6 text-brand-steel">
-              Без вырезания слабого металла, подготовки краёв и проверки зоны вокруг.
-            </p>
-          </article>
-          <article class="bg-ink p-6 text-white sm:p-8">
-            <p class="font-mono text-[10px] font-semibold uppercase text-white/55">Наш подход</p>
-            <h3 class="mt-12 text-2xl font-bold text-white">Открыть и подготовить участок</h3>
-            <p class="mt-4 text-sm leading-6 text-white/65">
-              Удалить разрушенный металл, подогнать ремонтный элемент и сварить на подготовленном основании.
-            </p>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="price" class="section-shell bg-[#fbfaf7]">
-    <div class="container-page grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
-      <div>
-        <p class="kicker">Стоимость</p>
-        <h2 class="section-heading">Цена зависит не от марки, а от работы</h2>
-        <p class="section-copy">
-          Один участок можно сварить при прямом доступе. Ради другого придётся разобрать часть машины, выполнить ремонт и собрать всё обратно.
-        </p>
+      <div class="section-intro section-intro-light" data-reveal>
+        <p class="section-kicker">Отзывы и кейсы</p>
+        <h2 class="display-heading">Оставляем места под реальные скрины и фото работ</h2>
       </div>
 
-      <div>
-        <div class="border-y border-black/15 py-7">
-          <p class="font-mono text-[10px] font-semibold uppercase text-brand-steel">Ориентир для простого случая</p>
-          <p class="mt-3 text-3xl font-extrabold text-ink sm:text-4xl">Локальная сварка — примерно от 10 000 ₽</p>
-          <p class="mt-3 max-w-2xl text-sm leading-6 text-brand-steel">
-            Только когда повреждение небольшое и к нему есть прямой доступ. Это не фиксированный прайс для любой машины.
-          </p>
-        </div>
-
-        <div class="mt-7 grid sm:grid-cols-2">
-          {
-            priceFactors.map((factor, index) => (
-              <div class="grid grid-cols-[38px_1fr] gap-3 border-b border-black/15 py-4 sm:odd:pr-5 sm:even:border-l sm:even:pl-5">
-                <span class="font-mono text-xs font-semibold text-signal">{String(index + 1).padStart(2, '0')}</span>
-                <p class="text-sm font-semibold leading-6 text-ink">{factor}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="works" class="section-shell border-y border-black/10 bg-paper">
-    <div class="container-page">
-      <div class="max-w-4xl">
-        <p class="kicker">Реальные работы</p>
-        <h2 class="section-heading">Здесь будут кейсы до, в процессе и после</h2>
-        <p class="section-copy">
-          Вместо выдуманных историй оставляем готовую структуру. Сюда поставим реальные фотографии и коротко подпишем, что было повреждено и что сделали.
-        </p>
-      </div>
-
-      <div class="mt-12 grid gap-4 lg:grid-cols-3">
+      <div class="reviews-grid">
         {
-          ['До ремонта', 'Открытый участок', 'После ремонта'].map((label, index) => (
-            <div class="work-placeholder flex aspect-[4/3] min-h-[260px] flex-col justify-between rounded-[6px] border border-dashed border-black/25 bg-[#e7e5df] p-5">
-              <div class="flex items-center justify-between gap-4">
-                <span class="font-mono text-xs font-semibold text-signal">{String(index + 1).padStart(2, '0')}</span>
-                <span class="font-mono text-[9px] uppercase text-brand-steel">Место для фото</span>
+          reviewSlots.map((slot, index) => (
+            <article class="review-card" data-reveal>
+              <div class="review-media">
+                {index === 1 ? (
+                  <img src="/images/power-frame-rust-after-960.webp" alt="Демонстрационный кадр после сварочного ремонта" loading="lazy" width="960" height="540" />
+                ) : (
+                  <span>место под материал</span>
+                )}
               </div>
-              <div>
-                <p class="text-xl font-bold text-ink">{label}</p>
-                <p class="mt-2 text-sm leading-6 text-brand-steel">Реальный материал будет добавлен после отбора фотографий.</p>
-              </div>
-            </div>
+              <p class="review-kicker">0{index + 1}</p>
+              <h3>{slot.title}</h3>
+              <p>{slot.text}</p>
+            </article>
           ))
         }
       </div>
     </div>
   </section>
 
-  <section id="reviews" class="section-shell bg-[#fbfaf7]">
-    <div class="container-page">
-      <div class="grid gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-        <div>
-          <p class="kicker">Отзывы владельцев</p>
-          <h2 class="section-heading">Без текстов от лица несуществующих клиентов</h2>
-          <p class="section-copy">
-            Когда появится переписка с клиентами, сюда добавим реальные скриншоты с аккуратно скрытыми личными данными.
-          </p>
-        </div>
-
-        <div class="grid gap-4 sm:grid-cols-2">
-          {
-            [1, 2, 3, 4].map((item) => (
-              <div class="review-placeholder min-h-[190px] rounded-[6px] border border-dashed border-black/25 bg-white p-5">
-                <div class="flex items-center gap-3">
-                  <span class="h-9 w-9 rounded-full bg-black/10"></span>
-                  <div class="flex-1">
-                    <span class="block h-2.5 w-24 rounded-full bg-black/10"></span>
-                    <span class="mt-2 block h-2 w-16 rounded-full bg-black/5"></span>
-                  </div>
-                </div>
-                <div class="mt-7 grid gap-2">
-                  <span class="block h-2 w-full rounded-full bg-black/10"></span>
-                  <span class="block h-2 w-[86%] rounded-full bg-black/10"></span>
-                  <span class="block h-2 w-[62%] rounded-full bg-black/10"></span>
-                </div>
-                <p class="mt-7 font-mono text-[9px] uppercase text-brand-steel">Скриншот отзыва {item}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="faq" class="section-shell border-t border-black/10 bg-paper">
-    <div class="container-page grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
-      <div>
-        <p class="kicker">Коротко и по делу</p>
-        <h2 class="section-heading">Что важно знать до звонка</h2>
+  <section id="faq" class="section section-faq">
+    <div class="container-page faq-layout">
+      <div class="faq-heading" data-reveal>
+        <p class="section-kicker">Вопросы</p>
+        <h2 class="display-heading">Что важно знать до осмотра</h2>
       </div>
 
-      <div class="border-t border-black/15">
+      <div class="faq-list">
         {
           faq.map((item) => (
-            <details class="group border-b border-black/15">
-              <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-6 text-lg font-bold text-ink sm:text-xl">
+            <details data-reveal>
+              <summary>
                 <span>{item.question}</span>
-                <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-black/20 text-xl font-normal transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+                <span class="faq-toggle" aria-hidden="true">+</span>
               </summary>
-              <p class="max-w-2xl pb-7 pr-10 text-sm leading-7 text-brand-steel sm:text-base">{item.answer}</p>
+              <p>{item.answer}</p>
             </details>
           ))
         }
@@ -385,4 +336,166 @@ const faq = [
   </section>
 
   <ContactBlock />
+
+  <script>
+    document.documentElement.classList.add('has-motion');
+
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -48px' },
+    );
+
+    document.querySelectorAll('[data-reveal]').forEach((element) => revealObserver.observe(element));
+
+    const setupRustReveal = (area) => {
+      const canvas = area.querySelector('[data-rust-canvas]');
+      const cleanSrc = area.getAttribute('data-clean-src');
+      if (!(canvas instanceof HTMLCanvasElement) || !cleanSrc) return;
+
+      const context = canvas.getContext('2d');
+      const mask = document.createElement('canvas');
+      const maskContext = mask.getContext('2d');
+      const cleanImage = new Image();
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let lastPoint = null;
+      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      if (!context || !maskContext) return;
+
+      cleanImage.src = cleanSrc;
+
+      const coverRect = () => {
+        const imageRatio = cleanImage.naturalWidth / cleanImage.naturalHeight;
+        const canvasRatio = canvas.width / canvas.height;
+        let width = canvas.width;
+        let height = canvas.height;
+
+        if (imageRatio > canvasRatio) {
+          height = canvas.height;
+          width = height * imageRatio;
+        } else {
+          width = canvas.width;
+          height = width / imageRatio;
+        }
+
+        return {
+          x: (canvas.width - width) / 2,
+          y: (canvas.height - height) / 2,
+          width,
+          height,
+        };
+      };
+
+      const render = () => {
+        if (!cleanImage.complete || !cleanImage.naturalWidth) return;
+        const rect = coverRect();
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(cleanImage, rect.x, rect.y, rect.width, rect.height);
+        context.globalCompositeOperation = 'destination-in';
+        context.drawImage(mask, 0, 0);
+        context.globalCompositeOperation = 'source-over';
+      };
+
+      const resize = () => {
+        const bounds = area.getBoundingClientRect();
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.max(1, Math.round(bounds.width * dpr));
+        canvas.height = Math.max(1, Math.round(bounds.height * dpr));
+        mask.width = canvas.width;
+        mask.height = canvas.height;
+        render();
+      };
+
+      const drawPoint = (x, y, radius) => {
+        maskContext.save();
+        maskContext.fillStyle = '#fff';
+        maskContext.shadowColor = '#fff';
+        maskContext.shadowBlur = radius * 0.22;
+        maskContext.beginPath();
+        maskContext.arc(x, y, radius, 0, Math.PI * 2);
+        maskContext.fill();
+        maskContext.restore();
+      };
+
+      const paint = (event) => {
+        const bounds = canvas.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) * dpr;
+        const y = (event.clientY - bounds.top) * dpr;
+        const radius = (window.innerWidth < 768 ? 50 : 78) * dpr;
+
+        if (lastPoint) {
+          const dx = x - lastPoint.x;
+          const dy = y - lastPoint.y;
+          const distance = Math.hypot(dx, dy);
+          const steps = Math.max(1, Math.ceil(distance / (radius * 0.38)));
+          for (let index = 0; index <= steps; index += 1) {
+            drawPoint(lastPoint.x + (dx * index) / steps, lastPoint.y + (dy * index) / steps, radius);
+          }
+        } else {
+          drawPoint(x, y, radius);
+        }
+
+        lastPoint = { x, y };
+        render();
+      };
+
+      const autoStroke = () => {
+        if (reduceMotion) return;
+        const y = canvas.height * 0.54;
+        const start = canvas.width * 0.28;
+        const end = canvas.width * 0.62;
+        const radius = (window.innerWidth < 768 ? 42 : 62) * dpr;
+        let frame = 0;
+        const total = 58;
+
+        const tick = () => {
+          const progress = frame / total;
+          const x = start + (end - start) * progress;
+          drawPoint(x, y + Math.sin(progress * Math.PI * 2) * 26 * dpr, radius);
+          render();
+          frame += 1;
+          if (frame <= total) requestAnimationFrame(tick);
+        };
+
+        requestAnimationFrame(tick);
+      };
+
+      cleanImage.addEventListener('load', () => {
+        resize();
+        window.setTimeout(autoStroke, 900);
+      });
+
+      area.addEventListener('pointermove', paint);
+      area.addEventListener('pointerleave', () => {
+        lastPoint = null;
+      });
+      area.addEventListener('pointerdown', (event) => {
+        area.setPointerCapture?.(event.pointerId);
+        paint(event);
+      });
+
+      window.addEventListener('resize', resize);
+      resize();
+    };
+
+    document.querySelectorAll('[data-rust-reveal]').forEach(setupRustReveal);
+
+    document.querySelectorAll('[data-compare]').forEach((widget) => {
+      const range = widget.querySelector('.compare-range');
+      if (!(range instanceof HTMLInputElement)) return;
+
+      const update = () => {
+        widget.style.setProperty('--compare', `${range.value}%`);
+      };
+
+      range.addEventListener('input', update);
+      update();
+    });
+  </script>
 </BaseLayout>

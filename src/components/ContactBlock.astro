@@ -1,27 +1,209 @@
-<section id="contacts" class="border-t border-white/10 bg-ink text-white">
-  <!-- Future stage: replace this block with the automated photo estimate flow. -->
-  <div class="container-page grid gap-12 py-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-end lg:py-24">
-    <div>
-      <p class="font-mono text-[11px] font-semibold uppercase text-white/55">Запись на осмотр</p>
-      <h2 class="mt-4 max-w-3xl text-4xl font-extrabold leading-[1.02] text-white sm:text-5xl lg:text-6xl">
-        Сначала короткий звонок в мастерскую
-      </h2>
-      <p class="mt-6 max-w-xl text-base leading-7 text-white/65 sm:text-lg">
-        Назовите марку, модель и место повреждения. Мастер скажет, стоит ли приезжать и как подготовить машину к осмотру.
-      </p>
+---
+import { SITE } from '../config';
+
+const hasPhone = !SITE.phone.includes('[');
+const hasAddress = !SITE.address.includes('[');
+
+const preparation = [
+  {
+    title: 'Фото рамы',
+    text: 'Общий план, крупный дефект и зона вокруг него.',
+  },
+  {
+    title: 'Марка и год',
+    text: 'Так проще понять доступ, тип рамы и частые слабые места.',
+  },
+  {
+    title: 'Что уже делали',
+    text: 'Старые заплаты, трещины и прошлый ремонт лучше показать сразу.',
+  },
+];
+---
+
+<section id="contacts" class="contact-section">
+  <div class="container-page contact-layout">
+    <div class="contact-main" data-reveal>
+      <p class="contact-kicker">Запись</p>
+      <h2>Приезжайте на осмотр</h2>
+      <p>Сначала смотрим машину на подъёмнике, потом спокойно обсуждаем объём, сроки и стоимость.</p>
+
+      {
+        hasPhone ? (
+          <div class="contact-actions">
+            <a href={SITE.phoneHref} class="contact-button">Позвонить в мастерскую</a>
+            <a href={SITE.phoneHref} class="contact-phone">{SITE.phone}</a>
+          </div>
+        ) : (
+          <div class="contact-actions">
+            <span class="contact-button contact-button-muted">Контакты добавим после согласования</span>
+          </div>
+        )
+      }
+
+      {hasAddress && <p class="contact-address">{SITE.address}</p>}
     </div>
 
-    <div class="grid gap-px overflow-hidden rounded-[6px] border border-white/20 bg-white/20 sm:grid-cols-2">
-      <div class="bg-[#202020] p-6 sm:p-8">
-        <p class="font-mono text-[10px] font-semibold uppercase text-white/45">Основной канал</p>
-        <p class="mt-10 text-2xl font-bold text-white">Телефон согласовывается</p>
-        <p class="mt-3 text-sm leading-6 text-white/55">Добавим рабочий номер перед финальным запуском.</p>
-      </div>
-      <div class="bg-[#202020] p-6 sm:p-8">
-        <p class="font-mono text-[10px] font-semibold uppercase text-white/45">Мастерская</p>
-        <p class="mt-10 text-2xl font-bold text-white">Адрес уточняется</p>
-        <p class="mt-3 text-sm leading-6 text-white/55">Адрес и график появятся после подтверждения помещения.</p>
-      </div>
-    </div>
+    <ol class="contact-list" data-reveal>
+      {
+        preparation.map((item, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
   </div>
 </section>
+
+<style>
+  .contact-section {
+    background: #e50914;
+    color: #fff;
+    padding-block: 96px;
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.75fr);
+    gap: 96px;
+    align-items: end;
+  }
+
+  .contact-kicker {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .contact-main h2 {
+    max-width: 780px;
+    margin: 18px 0 0;
+    font-family: var(--display);
+    font-size: 72px;
+    font-weight: 400;
+    line-height: 0.94;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  .contact-main > p:not(.contact-kicker, .contact-address) {
+    max-width: 600px;
+    margin: 26px 0 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    margin-top: 34px;
+  }
+
+  .contact-button {
+    display: inline-flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 14px 22px;
+    background: #090909;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 900;
+    text-decoration: none;
+    transition: transform 180ms ease, background-color 180ms ease;
+  }
+
+  .contact-button:hover {
+    background: #1a1a18;
+    transform: translateY(-2px);
+  }
+
+  .contact-button-muted {
+    background: rgba(9, 9, 9, 0.48);
+  }
+
+  .contact-phone {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .contact-address {
+    margin: 22px 0 0;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 13px;
+  }
+
+  .contact-list {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.34);
+    list-style: none;
+  }
+
+  .contact-list li {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.34);
+    padding: 24px 0;
+  }
+
+  .contact-list li > span {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 11px;
+    font-weight: 900;
+  }
+
+  .contact-list h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .contact-list p {
+    margin: 7px 0 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 1023px) {
+    .contact-layout {
+      grid-template-columns: 1fr;
+      gap: 54px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .contact-section {
+      padding-block: 72px;
+    }
+
+    .contact-main h2 {
+      font-size: 46px;
+      line-height: 0.96;
+    }
+
+    .contact-layout {
+      gap: 46px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .contact-main h2 {
+      font-size: 40px;
+    }
+  }
+</style>

@@ -1,38 +1,130 @@
 ---
+import { SITE } from '../config';
+
 const currentYear = new Date().getFullYear();
+const hasPhone = !SITE.phone.includes('[');
 ---
 
-<footer class="border-t border-black/10 bg-paper">
-  <div class="container-page grid gap-10 py-10 md:grid-cols-[1.3fr_1fr_1fr] md:py-14">
+<footer class="site-footer">
+  <div class="container-page footer-main">
     <div>
-      <p class="text-lg font-extrabold uppercase text-ink">Ремонт рам</p>
-      <p class="mt-2 max-w-sm text-sm leading-6 text-brand-steel">
-        Осмотр и сварочный ремонт рам автомобилей любых марок.
-      </p>
+      <p class="footer-brand">BEARD FRAME</p>
+      <p class="footer-copy">Сварочная мастерская Power Frame в Москве. Осмотр, сварка и восстановление рамных автомобилей.</p>
     </div>
 
-    <div>
-      <p class="font-mono text-[10px] font-semibold uppercase text-brand-steel">Навигация</p>
-      <div class="mt-3 grid gap-2 text-sm">
-        <a href="/#services" class="hover:text-signal">Что делаем</a>
-        <a href="/#inspection" class="hover:text-signal">Как проходит осмотр</a>
-        <a href="/#price" class="hover:text-signal">От чего зависит цена</a>
-      </div>
-    </div>
+    <nav class="footer-nav" aria-label="Навигация в подвале">
+      <a href="/#proof">До/после</a>
+      <a href="/#process">Осмотр</a>
+      <a href="/#services">Работы</a>
+      <a href="/#price">Стоимость</a>
+      <a href="/#faq">Вопросы</a>
+    </nav>
 
-    <div>
-      <p class="font-mono text-[10px] font-semibold uppercase text-brand-steel">Связаться</p>
-      <a href="/#contacts" class="mt-3 inline-flex text-sm font-semibold text-signal hover:text-brand-dark">
-        Запись по телефону
-      </a>
-      <p class="mt-3 text-xs leading-5 text-brand-steel">Номер, адрес и график добавим после согласования.</p>
+    <div class="footer-contact">
+      <p>Москва</p>
+      {hasPhone && <a href={SITE.phoneHref}>{SITE.phone}</a>}
     </div>
   </div>
 
-  <div class="border-t border-black/10">
-    <div class="container-page flex flex-col gap-2 py-4 text-xs text-brand-steel sm:flex-row sm:items-center sm:justify-between">
-      <p>© {currentYear} Ремонт рам автомобилей.</p>
-      <p>Презентационная версия</p>
+  <div class="footer-bottom">
+    <div class="container-page">
+      <p>© {currentYear} Power Frame Beard</p>
+      <p>Сварочная мастерская</p>
     </div>
   </div>
 </footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+    background: #050505;
+    color: #fff;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr 0.6fr;
+    gap: 64px;
+    padding-top: 58px;
+    padding-bottom: 58px;
+  }
+
+  .footer-brand {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .footer-copy {
+    max-width: 460px;
+    margin: 15px 0 0;
+    color: #8f8f87;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .footer-nav {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+
+  .footer-nav a,
+  .footer-contact a {
+    color: #9a9a92;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  .footer-nav a:hover,
+  .footer-contact a:hover {
+    color: #e50914;
+  }
+
+  .footer-contact p {
+    margin: 0 0 10px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 900;
+  }
+
+  .footer-contact a {
+    color: #e50914;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+  }
+
+  .footer-bottom .container-page {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding-top: 19px;
+    padding-bottom: 19px;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: #77776f;
+    font-size: 11px;
+  }
+
+  @media (max-width: 767px) {
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: 34px;
+      padding-top: 46px;
+      padding-bottom: 46px;
+    }
+
+    .footer-bottom .container-page {
+      flex-direction: column;
+      gap: 6px;
+    }
+  }
+</style>

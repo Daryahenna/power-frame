@@ -10,7 +10,7 @@ const schema = {
   '@context': 'https://schema.org',
   '@type': 'AutoRepair',
   name: SITE.companyName,
-  image: `${SITE.url}/images/og-cover.jpg`,
+  image: `${SITE.url}/og.jpg`,
   '@id': pageUrl,
   url: pageUrl,
   telephone: SITE.phoneHref.replace('tel:', ''),
@@ -29,8 +29,6 @@ const schema = {
     {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      opens: '00:00',
-      closes: '00:00',
       description: SITE.workHours,
     },
   ],

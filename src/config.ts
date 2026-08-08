@@ -1,8 +1,9 @@
 // Единая точка правды для плейсхолдеров. Заменить перед деплоем.
 export const SITE = {
-  domain: 'example-remont-ram.ru',
-  url: 'https://example-remont-ram.ru',
-  companyName: '[НАЗВАНИЕ КОМПАНИИ]',
+  isPreview: true,
+  domain: 'power-frame.ru',
+  url: 'https://power-frame.ru',
+  companyName: 'Power Frame Beard',
   phone: '[ТЕЛЕФОН]',
   phoneHref: 'tel:+70000000000',
   telegram: '[TELEGRAM]',
