@@ -13,8 +13,8 @@
   --paper-2: #fafaf5;
   --ink: #10100e;
   --brand-orange: #FE5200;
-  --brand-orange-hover: #ff6a24;
-  --brand-orange-dark: #b83b00;
+  --brand-orange-hover: var(--brand-orange);
+  --brand-orange-dark: var(--brand-orange);
   --brand-orange-rgb: 254, 82, 0;
   --brand-orange-contrast: #090909;
   --red: var(--brand-orange);
@@ -142,6 +142,7 @@ summary {
 
 .button-signal:hover {
   background: var(--brand-orange-hover);
+  box-shadow: 0 22px 58px rgba(var(--brand-orange-rgb), 0.42);
 }
 
 .button-ghost {

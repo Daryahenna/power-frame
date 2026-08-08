@@ -12,10 +12,10 @@ module.exports = {
         line: '#cdd1ce',
         brand: {
           DEFAULT: '#FE5200',
-          dark: '#b83b00',
+          dark: '#FE5200',
           black: '#070808',
           steel: '#5d6562',
-          soft: '#fff0e8',
+          soft: '#FE5200',
         },
       },
       fontFamily: {
