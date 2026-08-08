@@ -1,97 +1,72 @@
-# Деплой на VPS
+# Деплой Power Frame Beard
 
-Сайт — статический (Astro, `output: 'static'`). Сборка даёт папку `dist/` с готовыми HTML/CSS/JS —
-никакого Node.js процесса на сервере не нужно, только nginx.
+Сайт собран на Astro и публикуется через GitHub Pages.
 
-## 1. Перед первым деплоем
+## Основные ссылки
 
-1. Замени плейсхолдер домена на реальный:
-   - `astro.config.mjs` → `SITE_URL`
-   - `public/robots.txt` → `Sitemap:`
-2. Заполни реальные данные в `src/config.ts` (телефон, Telegram, WhatsApp, адрес, ИНН и т.д.) —
-   сейчас там плейсхолдеры вида `[ТЕЛЕФОН]`.
-3. Пройдись по `TODO:` в контенте (`src/content/models/*.yaml`, `src/pages/**`) — цены, кейсы,
-   отзывы, гарантийные сроки.
-4. Подключи backend для формы заявки (`src/components/CTAForm.astro`) — сейчас форма без
-   обработчика (`action="#"`). Проще всего — Telegram-бот по аналогии с ботами клиента (см.
-   `jlm_bot` / `nastya_bot` в инфраструктуре) или любая форм-CRM.
+- Репозиторий: `https://github.com/Daryahenna/power-frame`
+- Рабочий домен: `https://power-frame.ru`
+- GitHub Pages fallback: `https://daryahenna.github.io/power-frame/`
 
-## 2. Сборка
+Важно: fallback-ссылка на `github.io` нужна только как техническая проверка деплоя. Основной просмотр должен идти через `power-frame.ru`, потому что сборка рассчитана на корень домена.
 
-```bash
-npm install
-npm run build
-```
+## Как обновлять сайт
 
-Результат — папка `dist/`.
-
-## 3. Вариант A — просто nginx (рекомендуется, сайт статический)
-
-1. Скопировать `dist/` на VPS:
-
-```bash
-rsync -avz --delete dist/ root@<VPS_IP>:/var/www/remont-ram/
-```
-
-2. Конфиг nginx (`/etc/nginx/sites-available/remont-ram`):
-
-```nginx
-server {
-    listen 80;
-    server_name example-remont-ram.ru www.example-remont-ram.ru;
-
-    root /var/www/remont-ram;
-    index index.html;
-
-    gzip on;
-    gzip_types text/css application/javascript image/svg+xml application/json;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-
-    location = /404.html {
-        internal;
-    }
-
-    error_page 404 /404.html;
-}
-```
-
-3. Активировать и выпустить SSL:
-
-```bash
-ln -s /etc/nginx/sites-available/remont-ram /etc/nginx/sites-enabled/
-nginx -t && systemctl reload nginx
-certbot --nginx -d example-remont-ram.ru -d www.example-remont-ram.ru
-```
-
-## 4. Вариант B — Docker (если хочешь унифицировать с остальными проектами на VPS)
-
-`Dockerfile`:
-
-```dockerfile
-FROM node:22-alpine AS build
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-```
-
-Дальше — как обычный контейнер за общим nginx-реверс-прокси на VPS (тот же паттерн, что и у
-других твоих сервисов).
-
-## 5. Обновление сайта после правок контента
+1. Внести правки в проект.
+2. Проверить локально:
 
 ```bash
 npm run build
-rsync -avz --delete dist/ root@<VPS_IP>:/var/www/remont-ram/
 ```
 
-CI не настраивал — по умолчанию сборка и деплой руками/скриптом, как выше. Если понадобится
-автодеплой по git push — можно добавить простой GitHub Actions workflow отдельно.
+3. Закоммитить и отправить в `main`:
+
+```bash
+git add .
+git commit -m "Update site"
+git push origin main
+```
+
+После push GitHub Actions сам соберёт и опубликует сайт. Обычно обновление занимает 1-2 минуты.
+
+## DNS для Reg.ru
+
+В зоне DNS домена `power-frame.ru` нужно удалить старую A-запись на парковку/хостинг Reg.ru и поставить записи GitHub Pages.
+
+Для корня домена:
+
+| Тип | Имя | Значение |
+| --- | --- | --- |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+
+Для `www`:
+
+| Тип | Имя | Значение |
+| --- | --- | --- |
+| CNAME | `www` | `Daryahenna.github.io` |
+
+IPv6 можно добавить позже, если понадобится:
+
+| Тип | Имя | Значение |
+| --- | --- | --- |
+| AAAA | `@` | `2606:50c0:8000::153` |
+| AAAA | `@` | `2606:50c0:8001::153` |
+| AAAA | `@` | `2606:50c0:8002::153` |
+| AAAA | `@` | `2606:50c0:8003::153` |
+
+После смены DNS GitHub выпустит SSL-сертификат. Это может занять от нескольких минут до суток. Когда сертификат появится, можно включить `Enforce HTTPS` в GitHub Pages.
+
+## Перед SEO-запуском
+
+Сейчас главная закрыта от индексации через `SITE.isPreview` в `src/config.ts`, чтобы поисковики не забрали полуготовые контакты, цены и отзывы.
+
+Перед запуском:
+
+1. Заполнить телефон, мессенджеры, адрес, режим работы, юр. данные.
+2. Вставить реальные фото и скриншоты отзывов.
+3. Проверить формы/CTA.
+4. Поменять `isPreview: true` на `isPreview: false`.
+5. Собрать, закоммитить и отправить в `main`.
