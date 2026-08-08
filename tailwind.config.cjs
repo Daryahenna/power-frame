@@ -8,14 +8,14 @@ module.exports = {
         surface: '#f7f8f6',
         ink: '#101212',
         metal: '#929a98',
-        signal: '#c8ff3d',
+        signal: '#FE5200',
         line: '#cdd1ce',
         brand: {
-          DEFAULT: '#c8ff3d',
-          dark: '#b7f52a',
+          DEFAULT: '#FE5200',
+          dark: '#b83b00',
           black: '#070808',
           steel: '#5d6562',
-          soft: '#e8f4ca',
+          soft: '#fff0e8',
         },
       },
       fontFamily: {
@@ -23,7 +23,7 @@ module.exports = {
         mono: ['"Onest Variable"', 'sans-serif'],
       },
       boxShadow: {
-        focus: '0 0 0 3px rgba(200, 255, 61, 0.24)',
+        focus: '0 0 0 3px rgba(254, 82, 0, 0.26)',
       },
     },
   },

@@ -12,9 +12,14 @@
   --paper: #f1f1ec;
   --paper-2: #fafaf5;
   --ink: #10100e;
-  --red: #e50914;
-  --red-dark: #9b050c;
-  --amber: #ffb000;
+  --brand-orange: #FE5200;
+  --brand-orange-hover: #ff6a24;
+  --brand-orange-dark: #b83b00;
+  --brand-orange-rgb: 254, 82, 0;
+  --brand-orange-contrast: #090909;
+  --red: var(--brand-orange);
+  --red-dark: var(--brand-orange-dark);
+  --amber: var(--brand-orange);
   --line-dark: rgba(255, 255, 255, 0.14);
   --line-light: rgba(16, 16, 14, 0.15);
   --display: 'Russo One', 'Onest Variable', sans-serif;
@@ -40,7 +45,7 @@ body {
 
 ::selection {
   background: var(--red);
-  color: #fff;
+  color: var(--brand-orange-contrast);
 }
 
 a,
@@ -131,12 +136,12 @@ summary {
 
 .button-signal {
   background: var(--red);
-  color: #fff;
-  box-shadow: 0 18px 52px rgba(229, 9, 20, 0.32);
+  color: var(--brand-orange-contrast);
+  box-shadow: 0 18px 52px rgba(var(--brand-orange-rgb), 0.32);
 }
 
 .button-signal:hover {
-  background: #ff1520;
+  background: var(--brand-orange-hover);
 }
 
 .button-ghost {
@@ -190,7 +195,7 @@ summary {
 .hero-scrim {
   z-index: 2;
   background:
-    radial-gradient(circle at 68% 48%, rgba(229, 9, 20, 0.18), transparent 28%),
+    radial-gradient(circle at 68% 48%, rgba(var(--brand-orange-rgb), 0.18), transparent 28%),
     linear-gradient(90deg, rgba(5, 5, 5, 0.94) 0%, rgba(5, 5, 5, 0.78) 34%, rgba(5, 5, 5, 0.38) 64%, rgba(5, 5, 5, 0.9) 100%),
     linear-gradient(0deg, rgba(5, 5, 5, 0.7) 0%, rgba(5, 5, 5, 0.12) 48%, rgba(5, 5, 5, 0.84) 100%);
 }
@@ -257,7 +262,7 @@ summary {
   inset: 8% 7% 10%;
   z-index: -1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(229, 9, 20, 0.42), transparent 68%);
+  background: radial-gradient(circle, rgba(var(--brand-orange-rgb), 0.42), transparent 68%);
   filter: blur(34px);
   content: '';
   animation: machine-glow 3.6s ease-in-out infinite;
@@ -318,8 +323,8 @@ summary {
   height: 38px;
   border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(229, 9, 20, 0.52) 42%, transparent 72%);
-  box-shadow: 0 0 42px rgba(229, 9, 20, 0.46);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(var(--brand-orange-rgb), 0.52) 42%, transparent 72%);
+  box-shadow: 0 0 42px rgba(var(--brand-orange-rgb), 0.46);
 }
 
 .ticker {
@@ -328,7 +333,7 @@ summary {
   z-index: 5;
   overflow: hidden;
   background: var(--red);
-  color: #fff;
+  color: var(--brand-orange-contrast);
 }
 
 .ticker-track {
@@ -355,7 +360,7 @@ summary {
   height: 6px;
   margin-left: 32px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--brand-orange-contrast);
   content: '';
 }
 
@@ -437,7 +442,7 @@ summary {
   border-radius: 50%;
   background: var(--red);
   box-shadow: 0 12px 44px rgba(0, 0, 0, 0.45);
-  color: #fff;
+  color: var(--brand-orange-contrast);
   content: '';
   transform: translate(-50%, -50%);
 }
@@ -448,8 +453,8 @@ summary {
   left: 50%;
   width: 19px;
   height: 19px;
-  border-top: 2px solid #fff;
-  border-right: 2px solid #fff;
+  border-top: 2px solid var(--brand-orange-contrast);
+  border-right: 2px solid var(--brand-orange-contrast);
   content: '';
   transform: translate(-50%, -50%) rotate(45deg);
 }
@@ -488,7 +493,7 @@ summary {
 .section-price,
 .section-reviews {
   background:
-    radial-gradient(circle at 82% 18%, rgba(229, 9, 20, 0.18), transparent 27%),
+    radial-gradient(circle at 82% 18%, rgba(var(--brand-orange-rgb), 0.18), transparent 27%),
     linear-gradient(180deg, #070707 0%, #10100f 100%);
 }
 
@@ -519,7 +524,7 @@ summary {
 }
 
 .process-card:hover {
-  background: rgba(229, 9, 20, 0.2);
+  background: rgba(var(--brand-orange-rgb), 0.2);
   transform: translateY(-4px);
 }
 
@@ -571,7 +576,7 @@ summary {
 
 .service-row:hover {
   background: var(--red);
-  color: #fff;
+  color: var(--brand-orange-contrast);
   padding-inline: 24px;
 }
 
@@ -593,7 +598,7 @@ summary {
 
 .service-row:hover p,
 .service-row:hover .service-number {
-  color: #fff;
+  color: var(--brand-orange-contrast);
 }
 
 .price-layout {
@@ -797,7 +802,7 @@ summary {
 
 .faq-list details[open] .faq-toggle {
   background: var(--red);
-  color: #fff;
+  color: var(--brand-orange-contrast);
   transform: rotate(45deg);
 }
 
@@ -982,7 +987,7 @@ summary {
 
   .hero-scrim {
     background:
-      radial-gradient(circle at 64% 58%, rgba(229, 9, 20, 0.2), transparent 34%),
+      radial-gradient(circle at 64% 58%, rgba(var(--brand-orange-rgb), 0.2), transparent 34%),
       linear-gradient(0deg, rgba(5, 5, 5, 0.72) 0%, rgba(5, 5, 5, 0.3) 44%, rgba(5, 5, 5, 0.9) 100%),
       rgba(5, 5, 5, 0.5);
   }
