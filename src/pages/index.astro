@@ -129,21 +129,6 @@ const faq = [
           <a href="#process" class="button button-ghost">Как проходит осмотр</a>
         </div>
       </div>
-
-      <figure class="hero-machine reveal-intro reveal-intro-delay-3">
-        <img
-          src="/images/power-frame-welder.webp"
-          srcset="/images/power-frame-welder-720.webp 720w, /images/power-frame-welder.webp 1280w"
-          sizes="(min-width: 1024px) 42vw, 72vw"
-          alt="Профессиональный сварочный аппарат в мастерской"
-          width="1280"
-          height="960"
-        />
-        <figcaption>
-          <span>BEARD FRAME</span>
-          <strong>Power Frame workshop</strong>
-        </figcaption>
-      </figure>
     </div>
 
     <div class="brush-hint" aria-hidden="true">
@@ -163,6 +148,45 @@ const faq = [
         <span>Рама, металл, геометрия</span>
         <span>Без красивых заплат поверх гнили</span>
         <span>Power Frame Beard</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="workshop" class="section section-machine">
+    <div class="container-page machine-layout">
+      <div class="machine-copy" data-reveal>
+        <h2 class="machine-heading">
+          <span>Power Frame Beard</span>
+          <span>сварочная мастерская</span>
+        </h2>
+        <p>
+          Фокус не на красивой заплате сверху, а на живом металле вокруг повреждения. Сначала доступ и границы дефекта, потом нормальная сварка.
+        </p>
+      </div>
+
+      <div class="machine-stage" data-machine-stage data-reveal aria-label="Сварочный аппарат Power Frame Beard">
+        <div class="machine-light" aria-hidden="true"></div>
+        <figure class="living-machine">
+          <img
+            src="/images/power-frame-welder.webp"
+            srcset="/images/power-frame-welder-720.webp 720w, /images/power-frame-welder.webp 1280w"
+            sizes="(min-width: 1024px) 58vw, 100vw"
+            alt="Профессиональный сварочный аппарат в мастерской"
+            width="1280"
+            height="960"
+            loading="lazy"
+          />
+        </figure>
+        <div class="spark-field" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
   </section>
@@ -485,6 +509,53 @@ const faq = [
     };
 
     document.querySelectorAll('[data-rust-reveal]').forEach(setupRustReveal);
+
+    const setupLivingMachine = (stage) => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion) return;
+
+      let frame = 0;
+      let nextX = 0;
+      let nextY = 0;
+
+      const commit = () => {
+        stage.style.setProperty('--mx', nextX.toFixed(3));
+        stage.style.setProperty('--my', nextY.toFixed(3));
+        stage.style.setProperty('--glow-x', `${44 + nextX * 8}%`);
+        stage.style.setProperty('--glow-y', `${46 + nextY * 7}%`);
+        stage.style.setProperty('--light-x', `${52 + nextX * 34}%`);
+        stage.style.setProperty('--light-y', `${48 + nextY * 28}%`);
+        stage.style.setProperty('--machine-x', `${nextX * 24}px`);
+        stage.style.setProperty('--machine-y', `${nextY * 14}px`);
+        stage.style.setProperty('--machine-rx', `${nextY * 3}deg`);
+        stage.style.setProperty('--machine-ry', `${nextX * -5}deg`);
+        stage.style.setProperty('--shadow-x', `${nextX * -12}px`);
+        stage.style.setProperty('--shadow-y', `${nextY * -4}px`);
+        stage.style.setProperty('--spark-x', `${nextX * 18}px`);
+        stage.style.setProperty('--spark-y', `${nextY * 12}px`);
+        frame = 0;
+      };
+
+      const update = (event) => {
+        const bounds = stage.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width;
+        const y = (event.clientY - bounds.top) / bounds.height;
+        nextX = Math.max(-1, Math.min(1, (x - 0.5) * 2));
+        nextY = Math.max(-1, Math.min(1, (y - 0.5) * 2));
+        if (!frame) frame = requestAnimationFrame(commit);
+      };
+
+      const reset = () => {
+        nextX = 0;
+        nextY = 0;
+        if (!frame) frame = requestAnimationFrame(commit);
+      };
+
+      stage.addEventListener('pointermove', update);
+      stage.addEventListener('pointerleave', reset);
+    };
+
+    document.querySelectorAll('[data-machine-stage]').forEach(setupLivingMachine);
 
     document.querySelectorAll('[data-compare]').forEach((widget) => {
       const range = widget.querySelector('.compare-range');
